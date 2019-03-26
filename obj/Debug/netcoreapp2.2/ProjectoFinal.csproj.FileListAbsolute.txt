@@ -1,0 +1,11 @@
+/home/eladio/Desktop/Projecto/ProjectoFinal/bin/Debug/netcoreapp2.2/ProjectoFinal.deps.json
+/home/eladio/Desktop/Projecto/ProjectoFinal/bin/Debug/netcoreapp2.2/ProjectoFinal.runtimeconfig.json
+/home/eladio/Desktop/Projecto/ProjectoFinal/bin/Debug/netcoreapp2.2/ProjectoFinal.runtimeconfig.dev.json
+/home/eladio/Desktop/Projecto/ProjectoFinal/bin/Debug/netcoreapp2.2/ProjectoFinal.dll
+/home/eladio/Desktop/Projecto/ProjectoFinal/bin/Debug/netcoreapp2.2/ProjectoFinal.pdb
+/home/eladio/Desktop/Projecto/ProjectoFinal/obj/Debug/netcoreapp2.2/ProjectoFinal.csprojAssemblyReference.cache
+/home/eladio/Desktop/Projecto/ProjectoFinal/obj/Debug/netcoreapp2.2/ProjectoFinal.csproj.CoreCompileInputs.cache
+/home/eladio/Desktop/Projecto/ProjectoFinal/obj/Debug/netcoreapp2.2/ProjectoFinal.AssemblyInfoInputs.cache
+/home/eladio/Desktop/Projecto/ProjectoFinal/obj/Debug/netcoreapp2.2/ProjectoFinal.AssemblyInfo.cs
+/home/eladio/Desktop/Projecto/ProjectoFinal/obj/Debug/netcoreapp2.2/ProjectoFinal.dll
+/home/eladio/Desktop/Projecto/ProjectoFinal/obj/Debug/netcoreapp2.2/ProjectoFinal.pdb

@@ -1,0 +1,27 @@
+1. Crear cartas.
+2. Inicializar las cartas como disponibles es decir en valor -> 0.
+3. Barajar el maso.
+4. Repartir cartas.
+5. Poner carta inicial.
+LOOP
+{
+    6. Jugador  1 juega carta si la carta es valida.
+        --- Si no tiene disponible, entonces -->
+            -----Toma del maso.
+    7. Jugador 2 Juega carta si la carta es validad.
+}
+Cuando la carta tenga valor 1, es porque esta jugada.
+Si el jugador tiene la carta 8, puede jugarla cuando desee.
+Si el jugador 1 no tiene carta disponible y se termino el maso, el mismo cede al dos. 
+Si pasa lo mismo con el dos hay un empate.
+
+Cuando el jugador no tenga mas cartas. Gana el juego.
+
+Pensamiento y problema de sociedad.
+Analisis numerico
+Circuito 1
+Circuito 2
+Inferencia estadistica
+Ciencia, tecnologia y sociedad
+Logica de programacion
+Gobernabilidad de tecnologia
