@@ -25,3 +25,18 @@ Inferencia estadistica
 Ciencia, tecnologia y sociedad
 Logica de programacion
 Gobernabilidad de tecnologia
+Analisis y diseño de sistema.
+Prog 1
+Prog 2
+Prog 3
+Prog 4
+Antropologia social.
+Psicologia social.
+Ciberseguridad 1
+Ciberseguridad 2
+Ciberseguridad 3
+Ciberseguridad 4
+Ciberseguridad 5
+Ciberseguridad 6
+Ciberseguridad 7
+Ciberseguridad 8
