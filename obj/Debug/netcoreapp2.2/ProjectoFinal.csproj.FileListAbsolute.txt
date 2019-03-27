@@ -9,3 +9,14 @@
 /home/eladio/Desktop/Projecto/ProjectoFinal/obj/Debug/netcoreapp2.2/ProjectoFinal.AssemblyInfo.cs
 /home/eladio/Desktop/Projecto/ProjectoFinal/obj/Debug/netcoreapp2.2/ProjectoFinal.dll
 /home/eladio/Desktop/Projecto/ProjectoFinal/obj/Debug/netcoreapp2.2/ProjectoFinal.pdb
+/Users/macbookpro/Documents/GitHub/CrazyEights/bin/Debug/netcoreapp2.2/ProjectoFinal.deps.json
+/Users/macbookpro/Documents/GitHub/CrazyEights/bin/Debug/netcoreapp2.2/ProjectoFinal.runtimeconfig.json
+/Users/macbookpro/Documents/GitHub/CrazyEights/bin/Debug/netcoreapp2.2/ProjectoFinal.runtimeconfig.dev.json
+/Users/macbookpro/Documents/GitHub/CrazyEights/bin/Debug/netcoreapp2.2/ProjectoFinal.dll
+/Users/macbookpro/Documents/GitHub/CrazyEights/bin/Debug/netcoreapp2.2/ProjectoFinal.pdb
+/Users/macbookpro/Documents/GitHub/CrazyEights/obj/Debug/netcoreapp2.2/ProjectoFinal.csprojAssemblyReference.cache
+/Users/macbookpro/Documents/GitHub/CrazyEights/obj/Debug/netcoreapp2.2/ProjectoFinal.csproj.CoreCompileInputs.cache
+/Users/macbookpro/Documents/GitHub/CrazyEights/obj/Debug/netcoreapp2.2/ProjectoFinal.AssemblyInfoInputs.cache
+/Users/macbookpro/Documents/GitHub/CrazyEights/obj/Debug/netcoreapp2.2/ProjectoFinal.AssemblyInfo.cs
+/Users/macbookpro/Documents/GitHub/CrazyEights/obj/Debug/netcoreapp2.2/ProjectoFinal.dll
+/Users/macbookpro/Documents/GitHub/CrazyEights/obj/Debug/netcoreapp2.2/ProjectoFinal.pdb
