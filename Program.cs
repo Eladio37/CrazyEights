@@ -83,6 +83,44 @@ namespace ProjectoFinal {
         public static void TomarCarta (List<int> Jugador, bool[] cartas) {
 
         }
+
+ public static string ObtenerTipoCarta(int carta) {
+            if (carta < 13) {
+                return "Corazones";
+            }
+            else if (carta < 26) {
+                return "Diamantes";
+            }
+            else if (carta < 39) {
+                return "Trebol";
+            }
+            else if (carta < 52) {
+                return "Picas";
+            }
+            else
+            return null;
+        }
+
+        public static int ObtenerNumeroCarta(int carta) {
+            int modulo;
+            modulo = carta % 13;
+            if (modulo == 0) {
+                return 1;
+            } else if (modulo < 10) {
+                return modulo+1;
+            } else {
+                switch (modulo) {
+                    case 10:
+                        return 11;
+                    case 11:
+                        return 12;
+                    case 12:
+                        return 13;
+                }
+            }
+            return 0;
+        }
+
         public static void Imprimir (List<int> Jugador) {
             int numero = 1;
             string carta = "";
