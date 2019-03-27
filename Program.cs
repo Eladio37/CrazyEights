@@ -8,12 +8,15 @@ using System.Security.Cryptography;
 
 namespace ProjectoFinal {
     class Program {
-        public static string currencyCarta = "";
+        public static string currentCarta = "";
         static void Main (string[] args) {
             Console.Clear ();
             //1. Crear cartas
             bool[] cartas = new bool[52];
-
+            int currentPlayer = 1;
+            int cardtoPlay = 0;
+            bool finish = false;
+            bool draw = false;
             //Crear los dos jugadores
             List<int> Jugador1 = new List<int> ();
             List<int> Jugador2 = new List<int> ();
@@ -27,15 +30,40 @@ namespace ProjectoFinal {
             Repartir (Jugador1, cartas);
             Repartir (Jugador2, cartas);
 
-            //Imprimir por pantalla las cartas
-            Console.WriteLine ("\nLas cartas del Jugador 1 son: ");
-            Imprimir (Jugador1);
-            Console.WriteLine ("\nLas cartas del Jugador 2 son: ");
-            Imprimir (Jugador2);
-
-            Console.WriteLine ("\n Presione una tecla para continuar.");
-            Console.ReadKey ();
+            //4. Carta Inicial
             MostrarCarta (cartas);
+
+            //Turnos de jugadores
+            while (finish != true || draw != true){
+                Console.WriteLine ($"\n Le toca al Jugador {currentPlayer}. Las cartas del Jugador {currentPlayer} son: ");
+            if (currentPlayer == 1)
+            Imprimir (Jugador1);
+            else if (currentPlayer == 2)
+            Imprimir(Jugador2);
+
+            Console.Write($"Jugador {currentPlayer}, elige una carta de tu mano para jugar (-1 para pasar): ");
+            cardtoPlay = int.Parse(Console.ReadLine()) - 1;
+            if (cardtoPlay == -1) {
+            Console.WriteLine("Has cedido tu turno.");
+            }
+            else if (currentPlayer == 1)
+            Jugador1.RemoveAt(cardtoPlay); 
+            else if (currentPlayer == 2)
+            Jugador2.RemoveAt(cardtoPlay); 
+
+            Console.WriteLine($"Jugador {currentPlayer}, tus cartas ahora son: ");
+            if (currentPlayer == 1){
+            Imprimir (Jugador1);
+            currentPlayer = 2;
+            }
+            else if (currentPlayer == 2){
+            Imprimir(Jugador2);
+            currentPlayer = 1;
+            }
+            
+
+            }
+            
         }
 
         public static void Repartir (List<int> Jugador, bool[] cartas) {
@@ -111,8 +139,8 @@ namespace ProjectoFinal {
             while (cartas[cartaActual] != false) {
                 cartaActual = random.Next (0, 52);
             }
-            currencyCarta = TextoCarta (cartaActual);
-            Console.WriteLine ("\nEl maso contiene [{0}] cartas : Carta actual => {1}", contador, currencyCarta);
+            currentCarta = TextoCarta (cartaActual);
+            Console.WriteLine ($"\n La carta actual en la mesa es: {currentCarta}. Restan [{contador}] en el maso.");
         }
         public static int contarCartas (bool[] cartas) {
             int contador = 0;
