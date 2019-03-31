@@ -153,13 +153,13 @@ namespace ProjectoFinal {
             modulo = valor % 13;
 
             if (valor < 13) {
-                tipo = "♥ ♥ ♥ ♥";
+                tipo = "de Corazones";
             } else if (valor < 26) {
-                tipo = "♦ ♦ ♦ ♦";
+                tipo = "de Diamantes";
             } else if (valor < 39) {
-                tipo = "♣ ♣ ♣ ♣";
+                tipo = "de Treboles";
             } else {
-                tipo = "♠️ ♠ ️♠ ️♠️";
+                tipo = "de Picas";
             }
 
             if (modulo == 0) {
@@ -208,6 +208,5 @@ namespace ProjectoFinal {
             return contador;
 
         }
-
     }
 }
