@@ -23,7 +23,6 @@ namespace ProjectoFinal
             bool finish = false;
             bool draw = false;
             //Crear los dos jugadores
-            // Jugador1 = {35, 49, 20, 48}
             List<int> Jugador1 = new List<int>();
             List<int> Jugador2 = new List<int>();
 
@@ -52,6 +51,7 @@ namespace ProjectoFinal
             Console.WriteLine("**************");
             while (finish != true || draw != true)
             {
+                
                 //4. Este codigo muestra la carta actual que esta en la mesa.
                 Console.WriteLine($"\n La carta actual en la mesa es: {TextoCarta(cartaActual)}. Restan [{cartasRestantes}] en el maso.");
                 numeroCartaActual = ObtenerNumeroCarta(cartaActual);
@@ -74,9 +74,11 @@ namespace ProjectoFinal
                     // Console.WriteLine("Has cedido tu turno.");
                     if (currentPlayer == 1) {
                         TomarCarta(Jugador1, cartas);
+                        cartasRestantes--;
                     }
                     else if (currentPlayer == 2) {
                         TomarCarta(Jugador1, cartas);
+                        cartasRestantes--;
                     }
                 }
                 //Aqui se determina que jugador es que se va a ejecutar el codigo.
@@ -125,7 +127,6 @@ namespace ProjectoFinal
             }
 
         }
-
         public static void Repartir(List<int> Jugador, bool[] cartas)
         {
             Random random = new Random();
@@ -155,7 +156,6 @@ namespace ProjectoFinal
             cartas[newValue] = true;
 
         }
-
         public static string ObtenerTipoCarta(int carta)
         {
             if (carta < 13)
@@ -177,7 +177,6 @@ namespace ProjectoFinal
             else
                 return null;
         }
-
         public static int ObtenerNumeroCarta(int carta)
         {
             int modulo;
@@ -204,7 +203,6 @@ namespace ProjectoFinal
             }
             return 0;
         }
-
         public static void Imprimir(List<int> Jugador)
         {
             int numero = 1;
