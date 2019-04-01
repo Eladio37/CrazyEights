@@ -20,10 +20,11 @@ namespace ProjectoFinal {
             bool finish = false;
             bool draw = false;
             //Crear los dos jugadores
+            // Jugador1 = {35, 49, 20, 48}
             List<int> Jugador1 = new List<int>();
             List<int> Jugador2 = new List<int>();
 
-            //2. Inicializar cartas
+            //2. Inicializar cartas en falso, asi de da a entender que no se han utilizado ninguna.
             for (int i = 0; i < 52; i++)
             {
                 cartas[i] = false;
@@ -41,15 +42,17 @@ namespace ProjectoFinal {
             {
                 cartaActual = random.Next(0, 52);
             }
-            numeroCartaActual = ObtenerNumeroCarta(cartaActual);
-            tipoCartaActual = ObtenerTipoCarta(cartaActual);
 
             //Turnos de jugadores
+            Console.WriteLine("**************");
+            Console.WriteLine("PRIMERA JUGADA");
+            Console.WriteLine("**************");
             while (finish != true || draw != true)
             {
                 //4. Este codigo muestra la carta actual que esta en la mesa.
                 Console.WriteLine($"\n La carta actual en la mesa es: {TextoCarta(cartaActual)}. Restan [{cartasRestantes}] en el maso.");
-
+                numeroCartaActual = ObtenerNumeroCarta(cartaActual);
+                tipoCartaActual = ObtenerTipoCarta(cartaActual);
                 //5. Determina cual jugador va actualmente, mediante la variable currentPlayer
                 Console.WriteLine($"\n Le toca al Jugador {currentPlayer}. Las cartas del Jugador {currentPlayer} son: ");
                 if (currentPlayer == 1)
@@ -82,16 +85,19 @@ namespace ProjectoFinal {
                     else
                         //No deberia ceder turno, sino coger del maso.
                         Console.WriteLine("No puedes jugar esta carta, has perdido tu turno!");
+                        //Falta por agregar.
                 else if (currentPlayer == 2)
                     // Lo mismo de ahorita
                     if (ObtenerNumeroCarta(Jugador2[cardtoPlay]) == numeroCartaActual || ObtenerTipoCarta(Jugador2[cardtoPlay]) == tipoCartaActual)
                     {
-                        cartaActual = Jugador1[cardtoPlay];
+                        cartaActual = Jugador2[cardtoPlay];
                         Jugador2.RemoveAt(cardtoPlay);
                     }
                     else
                         //No deberia ceder turno, sino coger del maso.
                         Console.WriteLine("No puedes jugar esta carta, has perdido tu turno!");
+
+                        //Falta por agregar.
 
                 //Muestra la mano del jugador luego de haber jugado su carta
                 Console.WriteLine($"Jugador {currentPlayer}, tus cartas ahora son: ");
@@ -119,7 +125,6 @@ namespace ProjectoFinal {
             int newValue;
             for (int b = 0; b < 5; b++)
             {
-
                 newValue = random.Next(0, 52);
                 while (cartas[newValue] != false)
                 {
@@ -251,21 +256,21 @@ namespace ProjectoFinal {
             }
             return carta;
         }
-        public static void MostrarCarta(bool[] cartas)
-        {
-            //Console.Clear ();
-            int contador = contarCartas(cartas);
-            Random random = new Random();
-            int cartaActual = random.Next(0, 52);
-            while (cartas[cartaActual] != false)
-            {
-                cartaActual = random.Next(0, 52);
-            }
-            currentCarta = TextoCarta(cartaActual);
-            numeroCartaActual = ObtenerNumeroCarta(cartaActual);
-            tipoCartaActual = ObtenerTipoCarta(cartaActual);
-            Console.WriteLine($"\n La carta actual en la mesa es: {currentCarta}. Restan [{contador}] en el maso.");
-        }
+        // public static void MostrarCarta(bool[] cartas)
+        // {
+        //     //Console.Clear ();
+        //     int contador = contarCartas(cartas);
+        //     Random random = new Random();
+        //     int cartaActual = random.Next(0, 52);
+        //     while (cartas[cartaActual] != false)
+        //     {
+        //         cartaActual = random.Next(0, 52);
+        //     }
+        //     currentCarta = TextoCarta(cartaActual);
+        //     numeroCartaActual = ObtenerNumeroCarta(cartaActual);
+        //     tipoCartaActual = ObtenerTipoCarta(cartaActual);
+        //     Console.WriteLine($"\n La carta actual en la mesa es: {currentCarta}. Restan [{contador}] en el maso.");
+        // }
         public static int contarCartas(bool[] cartas)
         {
             int contador = 0;
