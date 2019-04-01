@@ -6,8 +6,11 @@ using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 
-namespace ProjectoFinal {
-    class Program {public static string currentCarta = "";
+namespace ProjectoFinal
+{
+    class Program
+    {
+        public static string currentCarta = "";
         public static string tipoCartaActual = "";
         public static int numeroCartaActual;
         static void Main(string[] args)
@@ -61,16 +64,20 @@ namespace ProjectoFinal {
                     Imprimir(Jugador2); // Si es jugador 2, imprime
 
 
-                Console.Write($"Jugador {currentPlayer}, elige una carta de tu mano para jugar (-1 para pasar): ");
+                Console.Write($"Jugador {currentPlayer}, elige una carta de tu mano para jugar (-1 para tomar del maso): ");
                 //Aqui se captura la carta que va a jugar, o si va a ceder turno (-1)
                 // Se guarda en la variable cardtoPlay, para saber el index de la carta en la mano de cada jugador.
                 // Para asi poder eliminarla de su mano mas tarde.
                 cardtoPlay = int.Parse(Console.ReadLine()) - 1; // El -1 es porque los indices son en base a 0, y esto empieza en 1.
                 if (cardtoPlay < 0)
                 {
-                    Console.WriteLine("Has cedido tu turno."); // Aqui no deberia ceder el turno
-                                                               // sino, volver a tirar otra valida,
-                                                               // o tomar cartas del maso.
+                    // Console.WriteLine("Has cedido tu turno.");
+                    if (currentPlayer == 1) {
+                        TomarCarta(Jugador1, cartas);
+                    }
+                    else if (currentPlayer == 2) {
+                        TomarCarta(Jugador1, cartas);
+                    }
                 }
                 //Aqui se determina que jugador es que se va a ejecutar el codigo.
                 else if (currentPlayer == 1)
@@ -85,7 +92,7 @@ namespace ProjectoFinal {
                     else
                         //No deberia ceder turno, sino coger del maso.
                         Console.WriteLine("No puedes jugar esta carta, has perdido tu turno!");
-                        //Falta por agregar.
+                //Falta por agregar.
                 else if (currentPlayer == 2)
                     // Lo mismo de ahorita
                     if (ObtenerNumeroCarta(Jugador2[cardtoPlay]) == numeroCartaActual || ObtenerTipoCarta(Jugador2[cardtoPlay]) == tipoCartaActual)
@@ -97,7 +104,7 @@ namespace ProjectoFinal {
                         //No deberia ceder turno, sino coger del maso.
                         Console.WriteLine("No puedes jugar esta carta, has perdido tu turno!");
 
-                        //Falta por agregar.
+                //Falta por agregar.
 
                 //Muestra la mano del jugador luego de haber jugado su carta
                 Console.WriteLine($"Jugador {currentPlayer}, tus cartas ahora son: ");
@@ -137,6 +144,15 @@ namespace ProjectoFinal {
         }
         public static void TomarCarta(List<int> Jugador, bool[] cartas)
         {
+            Random random = new Random();
+            int newValue;
+            newValue = random.Next(0, 52);
+            while (cartas[newValue] != false)
+            {
+                newValue = random.Next(0, 52);
+            }
+            Jugador.Add(newValue);
+            cartas[newValue] = true;
 
         }
 
