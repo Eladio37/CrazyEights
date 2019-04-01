@@ -21,8 +21,6 @@ namespace ProjectoFinal
             bool[] cartas = new bool[52];
             int currentPlayer = 1;
             int cardtoPlay = 0;
-            bool finish = false;
-            bool draw = false;
             #endregion
             //Crear los dos jugadores
             List<int> Jugador1 = new List<int>();
@@ -51,7 +49,7 @@ namespace ProjectoFinal
             Console.WriteLine("**************");
             Console.WriteLine("PRIMERA JUGADA");
             Console.WriteLine("**************");
-            while (finish != true || draw != true)
+            while (true)
             {
                 //4. Este codigo muestra la carta actual que esta en la mesa.
                 Console.WriteLine($"\n La carta actual en la mesa es: {TextoCarta(cartaActual)}. Restan [{cartasRestantes}] en el maso.");
@@ -73,17 +71,34 @@ namespace ProjectoFinal
                 if (cardtoPlay < 0)
                 {
                     // Console.WriteLine("Has cedido tu turno.");
-                    if (currentPlayer == 1) {
+                    if (currentPlayer == 1)
+                    {
                         TomarCarta(Jugador1, cartas);
                         cartasRestantes--;
+                        if (ObtenerNumeroCarta(Jugador1[Jugador1.Count -1]) != numeroCartaActual && ObtenerTipoCarta(Jugador1[Jugador1.Count - 1]) != tipoCartaActual)
+                        {
+                            Console.WriteLine("No has tenido suerte tomando cartas del maso, pierdes tu turno.");
+                        }
+                        else {
+                            continue;
+                        }
                     }
-                    else if (currentPlayer == 2) {
+                    else if (currentPlayer == 2)
+                    {
                         TomarCarta(Jugador2, cartas);
                         cartasRestantes--;
+                        if (ObtenerNumeroCarta(Jugador2[Jugador2.Count - 1]) != numeroCartaActual && ObtenerTipoCarta(Jugador2[Jugador2.Count - 1]) != tipoCartaActual)
+                        {
+                            Console.WriteLine("No has tenido suerte tomando cartas del maso, pierdes tu turno.");
+                        }
+                        else {
+                            continue;
+                        }
                     }
                 }
                 //Aqui se determina que jugador es que se va a ejecutar el codigo.
-                else if (currentPlayer == 1){
+                else if (currentPlayer == 1)
+                {
                     //Este if es para ver si el tipo, o el numero coincide.
                     // Me falta agregar que el 8 siempre se pueda.
                     if (ObtenerNumeroCarta(Jugador1[cardtoPlay]) == numeroCartaActual || ObtenerTipoCarta(Jugador1[cardtoPlay]) == tipoCartaActual)
@@ -91,26 +106,29 @@ namespace ProjectoFinal
                         // Si todo coincide, se le quita la carta de la mano para simular que la jugo.
                         cartaActual = Jugador1[cardtoPlay];
                         Jugador1.RemoveAt(cardtoPlay);
-                if (Jugador1.Count == 0) {
-                    Console.WriteLine("El Jugador 1 ha ganado!");
-                    return;
-                }
+                        if (Jugador1.Count == 0)
+                        {
+                            Console.WriteLine("El Jugador 1 ha ganado!");
+                            return;
+                        }
                     }
                     else
                         //No deberia ceder turno, sino coger del maso.
                         Console.WriteLine("No puedes jugar esta carta, has perdido tu turno!");
                 }
                 //Falta por agregar.
-                else if (currentPlayer == 2){
+                else if (currentPlayer == 2)
+                {
                     // Lo mismo de ahorita
                     if (ObtenerNumeroCarta(Jugador2[cardtoPlay]) == numeroCartaActual || ObtenerTipoCarta(Jugador2[cardtoPlay]) == tipoCartaActual)
                     {
                         cartaActual = Jugador2[cardtoPlay];
                         Jugador2.RemoveAt(cardtoPlay);
-                        if (Jugador2.Count == 0) {
-                    Console.WriteLine("El Jugador 2 ha ganado!");
-                    return;
-                }
+                        if (Jugador2.Count == 0)
+                        {
+                            Console.WriteLine("El Jugador 2 ha ganado!");
+                            return;
+                        }
                     }
                     else
                         //No deberia ceder turno, sino coger del maso.
