@@ -21,6 +21,7 @@ namespace ProjectoFinal
             bool[] cartas = new bool[52];
             int currentPlayer = 1;
             int cardtoPlay = 0;
+            bool stockExhausted = false;
             #endregion
             //Crear los dos jugadores
             List<int> Jugador1 = new List<int>();
@@ -37,20 +38,18 @@ namespace ProjectoFinal
             Repartir(Jugador2, cartas);
 
             //3.1. Pone la primera carta aleatoria en la mesa.
-            int cartasRestantes = contarCartas(cartas);
             Random random = new Random();
             int cartaActual = random.Next(0, 52);
             while (cartas[cartaActual] != false)
             {
                 cartaActual = random.Next(0, 52);
             }
+            cartas[cartaActual] = true;
+            int cartasRestantes = ContarCartas(cartas);
 
-            //Turnos de jugadores
-            Console.WriteLine("**************");
-            Console.WriteLine("PRIMERA JUGADA");
-            Console.WriteLine("**************");
             while (true)
             {
+                Console.Clear();
                 //4. Este codigo muestra la carta actual que esta en la mesa.
                 Console.WriteLine($"\n La carta actual en la mesa es: {TextoCarta(cartaActual)}. Restan [{cartasRestantes}] en el maso.");
                 numeroCartaActual = ObtenerNumeroCarta(cartaActual);
@@ -62,46 +61,74 @@ namespace ProjectoFinal
                 else if (currentPlayer == 2)
                     Imprimir(Jugador2); // Si es jugador 2, imprime
 
-
-                Console.Write($"Jugador {currentPlayer}, elige una carta de tu mano para jugar (-1 para tomar del maso): ");
+                playGame:
+                Console.Write($"Jugador {currentPlayer}, elige una carta de tu mano para jugar (0 para tomar del maso): ");
                 //Aqui se captura la carta que va a jugar, o si va a ceder turno (-1)
                 // Se guarda en la variable cardtoPlay, para saber el index de la carta en la mano de cada jugador.
                 // Para asi poder eliminarla de su mano mas tarde.
                 cardtoPlay = int.Parse(Console.ReadLine()) - 1; // El -1 es porque los indices son en base a 0, y esto empieza en 1.
-                if (cardtoPlay < 0)
+                #region TakeCard
+                if (cardtoPlay == -1)
                 {
-                    // Console.WriteLine("Has cedido tu turno.");
                     if (currentPlayer == 1)
                     {
-                        TomarCarta(Jugador1, cartas);
-                        cartasRestantes--;
-                        if (ObtenerNumeroCarta(Jugador1[Jugador1.Count -1]) != numeroCartaActual && ObtenerTipoCarta(Jugador1[Jugador1.Count - 1]) != tipoCartaActual)
+                        if (cartasRestantes > 0)
                         {
-                            Console.WriteLine("No has tenido suerte tomando cartas del maso, pierdes tu turno.");
+                            TomarCarta(Jugador1, cartas);
+                            cartasRestantes--;
+                            if (ObtenerNumeroCarta(Jugador1[Jugador1.Count - 1]) != numeroCartaActual && ObtenerTipoCarta(Jugador1[Jugador1.Count - 1]) != tipoCartaActual && ObtenerNumeroCarta(Jugador1[Jugador1.Count - 1]) != 8)
+                            {
+                                Console.WriteLine("\n Jugador 1, no has tenido suerte tomando cartas del maso, pierdes tu turno.");
+                                Console.WriteLine("\n Presiona enter para continuar con el turno del Jugador 2");
+                                Console.ReadKey();
+
+                            }
+                            else
+                            {
+                                continue;
+                            }
                         }
-                        else {
-                            continue;
+                        else
+                        {
+                            Console.WriteLine("No hay mas cartas en el maso!");
+                            stockExhausted = true;
+                            Console.ReadKey();
                         }
+                        Console.Clear();
+
                     }
                     else if (currentPlayer == 2)
                     {
-                        TomarCarta(Jugador2, cartas);
-                        cartasRestantes--;
-                        if (ObtenerNumeroCarta(Jugador2[Jugador2.Count - 1]) != numeroCartaActual && ObtenerTipoCarta(Jugador2[Jugador2.Count - 1]) != tipoCartaActual)
+                        if (cartasRestantes > 0)
                         {
-                            Console.WriteLine("No has tenido suerte tomando cartas del maso, pierdes tu turno.");
+                            TomarCarta(Jugador2, cartas);
+                            cartasRestantes--;
+                            if (ObtenerNumeroCarta(Jugador2[Jugador2.Count - 1]) != numeroCartaActual && ObtenerTipoCarta(Jugador2[Jugador2.Count - 1]) != tipoCartaActual && ObtenerNumeroCarta(Jugador2[Jugador2.Count - 1]) != 8)
+                            {
+                                Console.WriteLine("\n Jugador 2, no has tenido suerte tomando cartas del maso, pierdes tu turno.");
+                                Console.WriteLine("\n Presiona enter para continuar con el turno del Jugador 1");
+                                Console.ReadKey();
+                            }
+                            else
+                            {
+                                continue;
+                            }
                         }
-                        else {
-                            continue;
+                        else
+                        {
+                            Console.WriteLine("No hay mas cartas en el maso!");
+                            stockExhausted = true;
+                            Console.ReadKey();
                         }
+                        Console.Clear();
                     }
                 }
+                #endregion
                 //Aqui se determina que jugador es que se va a ejecutar el codigo.
                 else if (currentPlayer == 1)
                 {
                     //Este if es para ver si el tipo, o el numero coincide.
-                    // Me falta agregar que el 8 siempre se pueda.
-                    if (ObtenerNumeroCarta(Jugador1[cardtoPlay]) == numeroCartaActual || ObtenerTipoCarta(Jugador1[cardtoPlay]) == tipoCartaActual)
+                    if (ObtenerNumeroCarta(Jugador1[cardtoPlay]) == numeroCartaActual || ObtenerTipoCarta(Jugador1[cardtoPlay]) == tipoCartaActual || ObtenerNumeroCarta(Jugador1[cardtoPlay]) == 8)
                     {
                         // Si todo coincide, se le quita la carta de la mano para simular que la jugo.
                         cartaActual = Jugador1[cardtoPlay];
@@ -113,14 +140,24 @@ namespace ProjectoFinal
                         }
                     }
                     else
-                        //No deberia ceder turno, sino coger del maso.
-                        Console.WriteLine("No puedes jugar esta carta, has perdido tu turno!");
+                    {
+                        if (stockExhausted != false && Jugador1.Count == 1)
+                        {
+                            Console.WriteLine("El juego ha terminado empate!");
+                            return;
+
+                        }
+                        else
+                        {
+                            Console.WriteLine("No puedes jugar esta carta!");
+                            goto playGame;
+                        }
+                    }
                 }
-                //Falta por agregar.
+
                 else if (currentPlayer == 2)
                 {
-                    // Lo mismo de ahorita
-                    if (ObtenerNumeroCarta(Jugador2[cardtoPlay]) == numeroCartaActual || ObtenerTipoCarta(Jugador2[cardtoPlay]) == tipoCartaActual)
+                    if (ObtenerNumeroCarta(Jugador2[cardtoPlay]) == numeroCartaActual || ObtenerTipoCarta(Jugador2[cardtoPlay]) == tipoCartaActual || ObtenerNumeroCarta(Jugador2[cardtoPlay]) == 8)
                     {
                         cartaActual = Jugador2[cardtoPlay];
                         Jugador2.RemoveAt(cardtoPlay);
@@ -131,28 +168,30 @@ namespace ProjectoFinal
                         }
                     }
                     else
-                        //No deberia ceder turno, sino coger del maso.
-                        Console.WriteLine("No puedes jugar esta carta, has perdido tu turno!");
+                    {
+                        if (stockExhausted != false && Jugador2.Count == 1)
+                        {
+                            Console.WriteLine("El juego ha terminado empate!");
+                            return;
+
+                        }
+                        else
+                        {
+                            Console.WriteLine("No puedes jugar esta carta!");
+                            goto playGame;
+                        }
+                    }
                 }
 
-                //Falta por agregar.
-
-                //Muestra la mano del jugador luego de haber jugado su carta
-                Console.WriteLine($"Jugador {currentPlayer}, tus cartas ahora son: ");
                 if (currentPlayer == 1)
                 {
-                    Imprimir(Jugador1);
-                    //Aqui se cambia de jugador
                     currentPlayer = 2;
                 }
                 else if (currentPlayer == 2)
                 {
-                    Imprimir(Jugador2);
-                    //Aqui se cambia de jugador
                     currentPlayer = 1;
                 }
-
-
+                Console.Clear();
             }
 
         }
@@ -237,9 +276,9 @@ namespace ProjectoFinal
             int numero = 1;
             string carta = "";
 
-            foreach (var Imprimir in Jugador)
+            foreach (var imp in Jugador)
             {
-                carta = TextoCarta(Imprimir);
+                carta = TextoCarta(imp);
                 Console.WriteLine(numero + ". " + carta);
                 numero++;
             }
@@ -299,22 +338,7 @@ namespace ProjectoFinal
             }
             return carta;
         }
-        // public static void MostrarCarta(bool[] cartas)
-        // {
-        //     //Console.Clear ();
-        //     int contador = contarCartas(cartas);
-        //     Random random = new Random();
-        //     int cartaActual = random.Next(0, 52);
-        //     while (cartas[cartaActual] != false)
-        //     {
-        //         cartaActual = random.Next(0, 52);
-        //     }
-        //     currentCarta = TextoCarta(cartaActual);
-        //     numeroCartaActual = ObtenerNumeroCarta(cartaActual);
-        //     tipoCartaActual = ObtenerTipoCarta(cartaActual);
-        //     Console.WriteLine($"\n La carta actual en la mesa es: {currentCarta}. Restan [{contador}] en el maso.");
-        // }
-        public static int contarCartas(bool[] cartas)
+        public static int ContarCartas(bool[] cartas)
         {
             int contador = 0;
             for (int i = 0; i < 52; i++)
